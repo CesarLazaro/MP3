@@ -43,7 +43,7 @@ namespace MP3
                         if (filtro[filtro.Length - 1].Equals("mp3") || filtro[filtro.Length - 1].Equals("wmv"))
                         {
                             string nombre=C[i], ruta=R[i], albunes="DESCONOCIDO", genero = "DESCONOCIDO", 
-                                duracion = "DESCONOCIDO", anio = "DESCONOCIDO";
+                                duracion = "DESCONOCIDO", anio = "DESCONOCIDO",artista="DESCONOCIDO";
 
                             try
                             {
@@ -55,13 +55,14 @@ namespace MP3
                                 duracion = Convert.ToString(datos.Properties.Duration);
                                 anio = Convert.ToString(datos.Tag.Year);
                                 albunes = datos.Tag.Album;
+                                artista = datos.Tag.AlbumArtists[0];
                             }
                             catch
                             {
 
                             }
 
-                            Cancion temporal = new Cancion(C[i], R[i], albunes, genero,duracion ,anio);
+                            Cancion temporal = new Cancion(C[i], R[i], albunes, genero,duracion ,anio,artista);
                             canciones.Add(temporal);
                             Lista_Canciones.Items.Add(C[i]);
 
@@ -110,6 +111,7 @@ namespace MP3
             {
                 Lista_datos.Items.Clear();
                 Lista_datos.Items.Add("NOMBRE :" + temporal.nombre);
+                Lista_datos.Items.Add("ARTISTA :" + temporal.artista);
                 Lista_datos.Items.Add("ALBUM :" + temporal.album);
                 Lista_datos.Items.Add("GENERO :" + temporal.genero);
                 Lista_datos.Items.Add("DURACION :" + temporal.duracion);
